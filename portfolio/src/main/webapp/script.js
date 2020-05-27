@@ -16,13 +16,13 @@
  * Adds a random fact to the page.
  */
 function addRandomFact() {
-  const greetings =
+  const facts =
      ['I am 20 years old','I have three siblings','I like to make music','I like to code'];
 
   // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+  const fact = facts[Math.floor(Math.random() * facts.length)];
 
   // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+  const factContainer = document.getElementById('fact-container');
+  factContainer.innerText = fact;
 }
