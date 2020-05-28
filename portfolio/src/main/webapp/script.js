@@ -19,8 +19,8 @@ function addRandomFact() {
   const facts =
      ['I am 20 years old.','I have three siblings.','I like to make music.',
      'I like to code.', 'I like to play guitar.','I like to create.',
-     'I like tech.', 'I like to cook, but Im still learning.', 'I like seafood.', 'I like tacos.',
-     'I like to encourage people.', 'I interned in Mountain View Summer 2019.'];
+     'I like tech.', "I like to cook, but I'm still learning.", 'I like seafood.', 'I like tacos.',
+     'I like to encourage people.', 'I interned in Mountain View Summer 2019.', 'I dabble in graphic design.'];
 
   // Pick a random greeting.
   const fact = facts[Math.floor(Math.random() * facts.length)];
@@ -37,12 +37,9 @@ function addRandomFact() {
 // Get the elements with class="column"
 var elements = document.getElementsByClassName("column");
 
-// Declare a loop variable
-var i;
-
 // Full-width images
 function one() {
-    for (i = 0; i < elements.length; i++) {
+    for (var i = 0; i < elements.length; i++) {
     elements[i].style.msFlex = "100%";  // IE10
     elements[i].style.flex = "100%";
   }
@@ -50,7 +47,7 @@ function one() {
 
 // Two images side by side
 function two() {
-  for (i = 0; i < elements.length; i++) {
+  for (var i = 0; i < elements.length; i++) {
     elements[i].style.msFlex = "50%";  // IE10
     elements[i].style.flex = "50%";
   }
@@ -58,7 +55,7 @@ function two() {
 
 // Four images side by side
 function four() {
-  for (i = 0; i < elements.length; i++) {
+  for (var i = 0; i < elements.length; i++) {
     elements[i].style.msFlex = "25%";  // IE10
     elements[i].style.flex = "25%";
   }
