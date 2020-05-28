@@ -17,7 +17,10 @@
  */
 function addRandomFact() {
   const facts =
-     ['I am 20 years old','I have three siblings','I like to make music','I like to code'];
+     ['I am 20 years old.','I have three siblings.','I like to make music.',
+     'I like to code.', 'I like to play guitar.','I like to create.',
+     'I like tech.', 'I like to cook, but Im still learning.', 'I like seafood.', 'I like tacos.',
+     'I like to encourage people.', 'I interned in Mountain View Summer 2019.'];
 
   // Pick a random greeting.
   const fact = facts[Math.floor(Math.random() * facts.length)];
@@ -26,3 +29,5 @@ function addRandomFact() {
   const factContainer = document.getElementById('fact-container');
   factContainer.innerText = fact;
 }
+
+

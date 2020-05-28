@@ -9,5 +9,24 @@
 }
 
 p {
-    color: blueviolet;
+  color: rgb(53, 20, 83);
+}
+
+h2 {
+  text-align: center;
+  color: rgb(255, 216, 201);
+  background-color: rgb(175, 153, 235);
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+h1 {
+    text-align: center;
+    color: linen;
+    background-color:mediumslateblue;
 }
