@@ -32,6 +32,7 @@ h1 {
     background-color:mediumslateblue;
 }
 
+/*Styling for the photo grid from here down*/
 * {
   box-sizing: border-box;
 }
@@ -43,7 +44,6 @@ body {
 
 .header {
   text-align: center;
-  padding: 32px;
 }
 
 .row {
