@@ -8,8 +8,12 @@
   margin-top: 20px;
 }
 
+body {
+  background-color: lightcoral;
+}
+
 p {
-  color: rgb(53, 20, 83);
+  color: rgb(53, 20, 83);  
 }
 
 h2 {
@@ -27,9 +31,9 @@ h2 {
 }
 
 h1 {
-    text-align: center;
-    color: linen;
-    background-color:mediumslateblue;
+  text-align: center; 
+  color: linen;
+  background-color:mediumslateblue;
 }
 
 /*Styling for the photo grid from here down*/
