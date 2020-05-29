@@ -13,30 +13,57 @@
       <p>Hi, I'm Leah. I'm a rising Junior Computer Science student at North Carolina A&T State University, 
           but I grew up in Prince George's County, Maryland. </p>
       <img src = "/images/me.JPG" alt = "Picture of me" width = "500" height = "550" class = "center">
-      <p>This is my personal portfolio.</p>
-      <p>Click below for a fact about me:</p>
-      <button onclick="addRandomFact()">click here</button>
-      <div id="fact-container"></div>
-      <br>
+      <div class = "center2">
+        <div>This is my personal portfolio.</div>
+        <div>Click below for a fact about me:</div>
+        <br>
+        <button class = "btn" onclick="addRandomFact()">click here</button>
+        <div id="fact-container"></div>
+        <br>
 
-      <a>Let's connect on </a><a href="https://www.linkedin.com/in/leahmayo/">LinkedIn</a><a>!</a>
-      <br>
-      <a>Check out my </a><a href="https://github.com/leah-mayo">GitHub</a></a><a>!</a>
+        <a>Let's connect on </a><a href="https://www.linkedin.com/in/leahmayo/">LinkedIn</a><a>!</a>
+        <br>
+        <a>Check out my </a><a href="https://github.com/leah-mayo">GitHub</a></a><a>!</a>
+      </div>
       <h2> What makes me, me?</h2>
+      <p>I'm a driven individual, and I enjoy thinking outside of the box to solve problems and 
+          to put my creative imprint into my projects and hobbies. I'm very detail oriented, and
+          I like to exceed the standards set for me academically and professionally. I'm always
+          looking to learn something new to better myself, and increase my knowledge.
+          I like to encourage those who are younger than me and give them advice that helps them to 
+          accomplish their goals.</p>
+
+      
+      <div class="textrow">
+        <div class="textcolumn">
+          <h2>Industry Experience</h2>
+          <p>During Summer 2019 I interned with Google on the Assistant Team in Mountain View, CA.
+              My project consisted of implementing suggestion chips for app actions within the Google 
+              Assistant. I used C++, set up configs, and wrote unit tests for my code. This was such a valuable
+              experience and my takeaways were so much more than just technical information. I got to meet 
+              and talk with so many SWE's and professionals that forever have a lasting impact on me.
+          </p>
+        </div>
+        <div class="textcolumn">
+          <h2>Career Goals</h2>
+          <p>I aspire to graduate with my Bachelors of Science in Computer Science in 2022, and to 
+              pursue a career in Software Engineering that aligns with my studies. I'm using my internship
+              experience to really discover which areas in Computer Science that I want to 
+              focus on to start my career in the industry. 
+          </p>
+        </div>
+      </div>
 
       <h2>Comp Sci Courses I've Taken</h2>
-      <ul>
-        <li>Intro to Computer Programming</li>
-        <li>Computer Programming Design</li>
-        <li>Discrete Structures</li>
-        <li>Data Structures</li>
-        <li>Analysis of Algorithms</li>
+      <ul style= "list-style-type:none;">
+        <div class = "center2">
+          <li>Intro to Computer Programming</li>
+          <li>Computer Programming Design</li>
+          <li>Discrete Structures</li>
+          <li>Data Structures</li>
+          <li>Analysis of Algorithms</li>
+        </div>
       </ul>
-      
-      <br>
-
-      <h2>Past Internship Experience</h2>
-      <p></p>
 
       <h2>Hidden Talents</h2>
       <p>I have always been the quiet type, and I've never really liked being in a huge spotlight. 
@@ -45,7 +72,6 @@
           singing my whole life, really. It was surprising because I finally let my pent-up creativity flow freely and put it out there for the world to see, 
           after a lifetime of putting it on the back burner. My first song accumulated a few thousand listens
           after a week or two, and that was excting to see that I had the ability to reach people in my own way. </p>
-      <br>
 
       <p>I also really enjoy editing and superimposing pictures, and making graphics. It fascinates me that technology
           gives me so much freedom to create. Whenever I finish a new song, its so fun for me to create the cover artwork,
@@ -55,7 +81,7 @@
       <!-- Header for the Photo Grid --> 
       <div class="header" id="myHeader">
         <h1>My Photo Gallery</h1>
-        <p>Click on the buttons to change the grid view.</p>
+        <div class = "center2">Click on the buttons to change the grid view.</div>
         <button class="btn" onclick="one()">1</button>
         <button class="btn" onclick="two()">2</button>
         <button class="btn" onclick="four()">4</button>

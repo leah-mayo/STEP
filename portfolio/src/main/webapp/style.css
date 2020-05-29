@@ -13,30 +13,66 @@ body {
 }
 
 p {
-  color: rgb(53, 20, 83);  
+    text-align: justify;
+    padding-bottom: 10px;
+}
+
+.style {
+    width: 100%;
 }
 
 h2 {
   text-align: center;
   color: rgb(255, 216, 201);
   background-color: rgb(175, 153, 235);
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 25px;
 }
 
-/* Used to center align photo */
+/* Used to configure photo */
 .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+  border-radius: 50%;
+}
+
+/* Used to configure text */
+.center2 {
+  text-align: center;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.textcolumn {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.textrow:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 h1 {
   text-align: center; 
   color: linen;
   background-color:mediumslateblue;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 25px;
 }
 
-/*Styling for the photo grid from here down*/
+/* Styling for the photo grid from here down */
 * {
   box-sizing: border-box;
 }
@@ -78,13 +114,10 @@ body {
   background-color: #f1f1f1;
   cursor: pointer;
   font-size: 18px;
+  border-radius: 50px;
 }
 
 .btn:hover {
-  background-color: #ddd;
+  background-color:rgb(125, 100, 192);
 }
 
-.btn.active {
-  background-color: #666;
-  color: white;
-}
