@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  <body style="background c">
   <head>
     <meta charset="UTF-8">
     <title>My Portfolio</title>
@@ -9,16 +10,96 @@
   <body>
     <div id="content">
       <h1>Leah's Portfolio</h1>
-      <p>Hi, I'm Leah. I'm a rising Junior Computer Science student at North Carolina A&T State University, but I grew up in Prince George's County, Maryland. </p>
-      <img src = "/images/me.JPG" alt = "Picture of me :)" width = "400" height = "600">
-      <p>This is my portfolio.</p>
-      <p>Click here for a fact about me:</p>
-      <button onclick="addRandomFact()">Click Here</button>
+      <p>Hi, I'm Leah. I'm a rising Junior Computer Science student at North Carolina A&T State University, 
+          but I grew up in Prince George's County, Maryland. </p>
+      <img src = "/images/me.JPG" alt = "Picture of me" width = "500" height = "550" class = "center">
+      <p>This is my personal portfolio.</p>
+      <p>Click below for a fact about me:</p>
+      <button onclick="addRandomFact()">click here</button>
       <div id="fact-container"></div>
       <br>
-      <a href="https://www.linkedin.com/in/leahmayo/">Let's connect on LinkedIn!</a>
+
+      <a>Let's connect on </a><a href="https://www.linkedin.com/in/leahmayo/">LinkedIn</a><a>!</a>
       <br>
-      <a href="https://github.com/leah-mayo">Check out my GitHub!</a>
+      <a>Check out my </a><a href="https://github.com/leah-mayo">GitHub</a></a><a>!</a>
+      <h2> What makes me, me?</h2>
+
+      <h2>Comp Sci Courses I've Taken</h2>
+      <ul>
+        <li>Intro to Computer Programming</li>
+        <li>Computer Programming Design</li>
+        <li>Discrete Structures</li>
+        <li>Data Structures</li>
+        <li>Analysis of Algorithms</li>
+      </ul>
+      
+      <br>
+
+      <h2>Past Internship Experience</h2>
+      <p></p>
+
+      <h2>Hidden Talents</h2>
+      <p>I have always been the quiet type, and I've never really liked being in a huge spotlight. 
+          So, I surprised everyone, including myself, last year when I wrote my first song, recorded it, and released it to SoundCloud. It wasn't surprising to me
+          that I had the technical abilities to figure out how to use Garageband to produce and record. It wasn't even surprising to me that my song had a catchy tune; I've been 
+          singing my whole life, really. It was surprising because I finally let my pent-up creativity flow freely and put it out there for the world to see, 
+          after a lifetime of putting it on the back burner. My first song accumulated a few thousand listens
+          after a week or two, and that was excting to see that I had the ability to reach people in my own way. </p>
+      <br>
+
+      <p>I also really enjoy editing and superimposing pictures, and making graphics. It fascinates me that technology
+          gives me so much freedom to create. Whenever I finish a new song, its so fun for me to create the cover artwork,
+          lyric videos, and all the promo content to post on my social media accounts. </p>
+      <br>
+
+      <!-- Header for the Photo Grid --> 
+      <div class="header" id="myHeader">
+        <h1>My Photo Gallery</h1>
+        <p>Click on the buttons to change the grid view.</p>
+        <button class="btn" onclick="one()">1</button>
+        <button class="btn" onclick="two()">2</button>
+        <button class="btn" onclick="four()">4</button>
+      </div>
+
+      <br>
+      <!-- Photo Grid pictures situated in rows and columns --> 
+      <div class="row">
+        <div class="column">
+            <img src="/images/me2.HEIC" alt= "me" style="width:100%">
+            <img src="/images/me3.HEIC" alt= "me" style="width:100%">
+            <img src="/images/me4.JPG" alt= "me" style="width:100%">
+            <img src="/images/me5.JPG" alt= "me" style="width:100%">
+            <img src="/images/me6.JPG" alt= "me" style="width:100%">
+            <img src="/images/me13.HEIC" alt= "me" style="width:100%">
+            <img src="/images/me14.JPG" alt= "me" style="width:100%">
+        </div>
+        <div class="column">
+            <img src="/images/me7.jpg" alt= "me" style="width:100%">
+            <img src="/images/me8.jpg" alt= "me" style="width:100%">
+            <img src="/images/me9.JPG" alt= "me" style="width:100%">
+            <img src="/images/me10.JPG" alt= "me" style="width:100%">
+            <img src="/images/me11.JPG" alt= "me" style="width:100%">
+            <img src="/images/me12.HEIC" alt= "me" style="width:100%">
+        </div>
+        <div class="column">
+            <img src="/images/me2.HEIC" alt= "me" style="width:100%">
+            <img src="/images/me3.HEIC" alt= "me" style="width:100%">
+            <img src="/images/me4.JPG" alt= "me" style="width:100%">
+            <img src="/images/me5.JPG" alt= "me" style="width:100%">
+            <img src="/images/me6.JPG" alt= "me" style="width:100%">
+            <img src="/images/me13.HEIC" alt= "me" style="width:100%">
+            <img src="/images/me14.JPG" alt= "me" style="width:100%">
+        </div>
+        <div class="column">
+            <img src="/images/me7.jpg" alt= "me" style="width:100%">
+            <img src="/images/me8.jpg" alt= "me" style="width:100%">
+            <img src="/images/me9.JPG" alt= "me" style="width:100%">
+            <img src="/images/me10.JPG" alt= "me" style="width:100%">
+            <img src="/images/me11.JPG" alt= "me" style="width:100%">
+            <img src="/images/me12.HEIC" alt= "me" style="width:100%">
+        </div>
+    </div>
+      
     </div>
   </body>
 </html>
