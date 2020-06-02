@@ -61,3 +61,9 @@ function four() {
     elements[i].style.flex = "25%";
   }
 }
+
+async function hiLeah() {
+  const response = await fetch('/data');
+  const hi = await response.text();
+  document.getElementById('hi-container').innerText = hi;
+}
