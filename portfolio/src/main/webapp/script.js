@@ -62,8 +62,11 @@ function four() {
   }
 }
 
-async function hiLeah() {
-  const response = await fetch('/data');
-  const hi = await response.text();
-  document.getElementById('hi-container').innerText = hi;
+/**
+ * Fetches "Hello Leah" message from the server
+ */
+function greeting() {
+  fetch('/data').then(response => response.text()).then((message) => {
+    document.getElementById('data-container').innerText = message;
+  });
 }
