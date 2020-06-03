@@ -31,9 +31,9 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     ArrayList<String> jsonData = new ArrayList<String>();  
-    jsonData.add("Jane");
-    jsonData.add("John");
-    jsonData.add("Jake");
+    jsonData.add("nice!");
+    jsonData.add("cool!");
+    jsonData.add("awesome!");
     convertToJsonUsingGson(jsonData);
     response.setContentType("application/json;");
     response.getWriter().println(jsonData);
