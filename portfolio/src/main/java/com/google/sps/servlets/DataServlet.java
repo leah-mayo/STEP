@@ -25,7 +25,7 @@ import java.util.ArrayList;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-    
+  Gson gson = new Gson();  
   
  
   @Override
@@ -34,15 +34,13 @@ public class DataServlet extends HttpServlet {
     jsonData.add("nice!");
     jsonData.add("cool!");
     jsonData.add("awesome!");
-    convertToJsonUsingGson(jsonData);
+    String jsonOutput = convertToJsonUsingGson(jsonData);
     response.setContentType("application/json;");
-    response.getWriter().println(jsonData);
+    response.getWriter().println(jsonOutput);
   }
 
   private String convertToJsonUsingGson(ArrayList<String> jsonData) {
-    Gson gson = new Gson();
-    String json = gson.toJson(jsonData);
-    return json;
+    return gson.toJson(jsonData);
   }
 }
 
