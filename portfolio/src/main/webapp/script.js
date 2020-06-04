@@ -63,9 +63,9 @@ function four() {
 }
 
 /**
- * Fetches "Hello Leah" message from the server
+ * Fetches messages from the server
  */
-function greeting() {
+function message() {
   fetch('/data').then(response => response.text()).then((message) => {
     document.getElementById('data-container').innerText = message;
   });
