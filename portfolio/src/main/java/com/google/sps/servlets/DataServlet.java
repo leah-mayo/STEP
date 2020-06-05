@@ -22,13 +22,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-private static Gson gson = new Gson();  
-private static final ArrayList<String> comments = new ArrayList<String>();  
-  
+  private static Gson gson = new Gson();  
+  private static final ArrayList<String> comments = new ArrayList<String>();  
  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -46,10 +48,8 @@ private static final ArrayList<String> comments = new ArrayList<String>();
     String input = getParameter(request, "text-input", "");
     String[] words = input.split("\\s*,\\s*");
 
-    int i = 0;
     for ( String word : words) {
-       comments.add(words[i] + "\n"); 
-       i++;
+       comments.add(words + "\n"); 
     }
 
     response.setContentType("text/html");
