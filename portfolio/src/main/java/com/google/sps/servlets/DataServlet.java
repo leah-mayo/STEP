@@ -29,7 +29,7 @@ import com.google.appengine.api.datastore.Entity;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-  private static Gson gson = new Gson();  
+  private static final Gson gson = new Gson();  
   private static final ArrayList<String> comments = new ArrayList<String>();  
  
   @Override
@@ -46,12 +46,9 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String input = getParameter(request, "text-input", "");
-    String[] words = input.split("\\s*,\\s*");
+    comments.add(input);
 
-    for ( String word : words) {
-       comments.add(words + "\n"); 
-    }
-
+    
     response.setContentType("text/html");
     response.getWriter().println(comments);
   }
