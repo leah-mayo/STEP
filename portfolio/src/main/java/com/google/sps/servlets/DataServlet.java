@@ -21,26 +21,49 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.Arrays;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-  Gson gson = new Gson();  
-  
+  private static final Gson gson = new Gson();  
+  private static final ArrayList<String> comments = new ArrayList<String>();  
  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    ArrayList<String> jsonData = new ArrayList<String>();  
-    jsonData.add("nice!");
-    jsonData.add("cool!");
-    jsonData.add("awesome!");
-    String jsonOutput = convertToJsonUsingGson(jsonData);
     response.setContentType("application/json;");
-    response.getWriter().println(jsonOutput);
+    response.getWriter().println(convertToJsonUsingGson(comments));
   }
 
   private String convertToJsonUsingGson(ArrayList<String> jsonData) {
     return gson.toJson(jsonData);
   }
+  
+  // Get the comments from the user and display them
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String input = getParameter(request, "text-input", "");
+    comments.add(input);
+
+    
+    response.setContentType("text/html");
+    response.getWriter().println(comments);
+  }
+
+   /**
+    * @return the request parameter, or the default value if the parameter
+    *         was not specified by the client
+    */
+   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }
+  
 }
 
