@@ -25,6 +25,10 @@ import java.util.Arrays;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.PreparedQuery;
+import java.util.List;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
@@ -36,21 +40,28 @@ public class DataServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("application/json;");
     response.getWriter().println(convertToJsonUsingGson(comments));
+    
   }
 
   private String convertToJsonUsingGson(ArrayList<String> jsonData) {
     return gson.toJson(jsonData);
   }
   
-  // Get the comments from the user and display them
+  // Get the comments from the user and add them to datastore
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String input = getParameter(request, "text-input", "");
     comments.add(input);
 
-    
-    response.setContentType("text/html");
-    response.getWriter().println(comments);
+    Entity commentEntity = new Entity("Comments");
+    commentEntity.setProperty("Comment", input);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(commentEntity);
+
+    Query query = new Query("Task").addSort("timestamp", SortDirection.DESCENDING);
+    PreparedQuery results = datastore.prepare(query);
+
+    response.sendRedirect("/index.html");
   }
 
    /**
