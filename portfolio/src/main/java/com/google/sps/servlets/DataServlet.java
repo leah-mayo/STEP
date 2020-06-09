@@ -33,7 +33,7 @@ import java.util.List;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-    
+
   private static final Gson gson = new Gson();  
   private static final ArrayList<String> commentList = new ArrayList<String>();
   private static final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService(); 
@@ -41,6 +41,15 @@ public class DataServlet extends HttpServlet {
  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    
+    Query query = new Query(COMMENT);
+    PreparedQuery results = datastore.prepare(query);
+    for (Entity entity : results.asIterable()) {
+        String comment = (String) entity.getProperty(COMMENT);
+        commentList.add(comment);
+    }
+
+    
     response.setContentType("application/json;");
     response.getWriter().println(convertToJsonUsingGson(commentList));
     
@@ -60,27 +69,7 @@ public class DataServlet extends HttpServlet {
     commentEntity.setProperty(COMMENT, input);
     datastore.put(commentEntity);
 
-
-    Query query = new Query("Task");
-    PreparedQuery results = datastore.prepare(query);
-    for (Entity entity : results.asIterable()) {
-        String comment = (String) entity.getProperty(COMMENT);
-        commentList.add(comment);
-    }
-
-
     response.sendRedirect("/index.html");
-  }
-
-  @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("application/json;");
-    response.getWriter().println(convertToJsonUsingGson(commentList));
-    
-  }
-
-  private String convertToJsonUsingGson(ArrayList<String> jsonData) {
-    return gson.toJson(jsonData);
   }
 
    /**
