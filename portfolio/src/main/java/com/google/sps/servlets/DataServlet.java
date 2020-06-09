@@ -25,32 +25,50 @@ import java.util.Arrays;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.PreparedQuery;
+import java.util.List;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
+
   private static final Gson gson = new Gson();  
-  private static final ArrayList<String> comments = new ArrayList<String>();  
+  private static final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService(); 
+  private static final String COMMENT = "Comment";  
  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    ArrayList<String> commentList = new ArrayList<String>();
+
+    // Set up the query to fetch the comments from server
+    Query query = new Query(COMMENT);
+    PreparedQuery results = datastore.prepare(query);
+    for (Entity entity : results.asIterable()) {
+        String comment = (String) entity.getProperty(COMMENT);
+        commentList.add(comment);
+    }
+
     response.setContentType("application/json;");
-    response.getWriter().println(convertToJsonUsingGson(comments));
+    response.getWriter().println(convertToJsonUsingGson(commentList));
+    
   }
 
   private String convertToJsonUsingGson(ArrayList<String> jsonData) {
     return gson.toJson(jsonData);
   }
   
-  // Get the comments from the user and display them
+  // Get the comments from the user and add them to datastore
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String input = getParameter(request, "text-input", "");
-    comments.add(input);
 
-    
-    response.setContentType("text/html");
-    response.getWriter().println(comments);
+    Entity commentEntity = new Entity(COMMENT);
+    commentEntity.setProperty(COMMENT, input);
+    datastore.put(commentEntity);
+
+    response.sendRedirect("/index.html");
   }
 
    /**
