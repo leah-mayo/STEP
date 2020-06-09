@@ -66,7 +66,7 @@ function four() {
  * Fetches comments from the server
  */
 function retrieveComments() {
-  fetch('/data').then(response => response.text()).then((message) => {
-    document.getElementById('data-container').innerText = message;
+  fetch('/data').then(response => response.json()).then((comments) => {
+    document.getElementById('data-container').innerHTML = comments;
   });
 }

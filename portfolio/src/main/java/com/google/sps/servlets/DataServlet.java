@@ -33,13 +33,16 @@ import java.util.List;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
+    
   private static final Gson gson = new Gson();  
-  private static final ArrayList<String> comments = new ArrayList<String>();  
+  private static final ArrayList<String> commentList = new ArrayList<String>();
+  private static final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService(); 
+  private static final String COMMENT = "Comment";  
  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("application/json;");
-    response.getWriter().println(convertToJsonUsingGson(comments));
+    response.getWriter().println(convertToJsonUsingGson(commentList));
     
   }
 
@@ -51,17 +54,33 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String input = getParameter(request, "text-input", "");
-    comments.add(input);
+    //comments.add(input);
 
-    Entity commentEntity = new Entity("Comments");
-    commentEntity.setProperty("Comment", input);
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    Entity commentEntity = new Entity(COMMENT);
+    commentEntity.setProperty(COMMENT, input);
     datastore.put(commentEntity);
 
-    Query query = new Query("Task").addSort("timestamp", SortDirection.DESCENDING);
+
+    Query query = new Query("Task");
     PreparedQuery results = datastore.prepare(query);
+    for (Entity entity : results.asIterable()) {
+        String comment = (String) entity.getProperty(COMMENT);
+        commentList.add(comment);
+    }
+
 
     response.sendRedirect("/index.html");
+  }
+
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    response.setContentType("application/json;");
+    response.getWriter().println(convertToJsonUsingGson(commentList));
+    
+  }
+
+  private String convertToJsonUsingGson(ArrayList<String> jsonData) {
+    return gson.toJson(jsonData);
   }
 
    /**
