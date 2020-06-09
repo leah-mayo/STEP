@@ -35,13 +35,14 @@ import java.util.List;
 public class DataServlet extends HttpServlet {
 
   private static final Gson gson = new Gson();  
-  private static final ArrayList<String> commentList = new ArrayList<String>();
   private static final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService(); 
   private static final String COMMENT = "Comment";  
  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    
+    ArrayList<String> commentList = new ArrayList<String>();
+
+    // Set up the query to fetch the comments from server
     Query query = new Query(COMMENT);
     PreparedQuery results = datastore.prepare(query);
     for (Entity entity : results.asIterable()) {
@@ -49,7 +50,6 @@ public class DataServlet extends HttpServlet {
         commentList.add(comment);
     }
 
-    
     response.setContentType("application/json;");
     response.getWriter().println(convertToJsonUsingGson(commentList));
     
@@ -63,7 +63,6 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String input = getParameter(request, "text-input", "");
-    //comments.add(input);
 
     Entity commentEntity = new Entity(COMMENT);
     commentEntity.setProperty(COMMENT, input);
