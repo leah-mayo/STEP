@@ -76,7 +76,7 @@ h1 {
   border-radius: 25px;
 }
 
-/* Styling for the photo grid from here down */
+/* Styling for the photo grid */
 * {
   box-sizing: border-box;
 }
@@ -98,7 +98,7 @@ body {
   padding: 0 4px;
 }
 
-/* Create two equal columns that sits next to each other */
+/* Create two equal columns that sit next to each other */
 .column {
   -ms-flex: 50%; /* IE 10 */
   flex: 50%;
@@ -125,3 +125,10 @@ body {
   background-color:rgb(125, 100, 192);
 }
 
+.hidden {
+    visibility: hidden;
+}
+
+.gone {
+    display: none;
+}
