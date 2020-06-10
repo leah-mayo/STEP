@@ -63,10 +63,52 @@ function four() {
 }
 
 /**
- * Fetches comments from the server
+ * Fetches comments from the server and adds them to the page
  */
 function retrieveComments() {
   fetch('/data').then(response => response.json()).then((comments) => {
-    document.getElementById('data-container').innerHTML = comments;
+    console.log("retrieved comments: " + comments);
+    addComments(comments);
   });
+}
+
+/**
+ * Add comments to the page
+ */
+function addComments(commentList) {
+    const commentListElement = document.getElementById("data-container");
+    while (commentListElement.firstChild) {
+        commentListElement.removeChild(commentListElement.firstChild);
+    }
+
+    for (comment of commentList) {
+        commentListElement.appendChild(createCommentElement(comment));
+    }   
+}
+
+function createCommentElement(comment) {
+    let commentElement = document.createElement('div');
+    commentElement.classList.add("Comment");
+    
+    let commentText = document.createElement('p');
+    commentText.innerText = comment.text;
+    commentElement.appendChild(commentText);
+
+    return commentElement;
+    
+}
+
+/**
+ * Toggles comment visibility
+ */
+function toggleComments() {
+    let comments = document.getElementById("data-container");
+    comments.classList.toggle("gone");
+
+    let view = document.getElementById("show-hide-comments");
+    if (view.innerText == "Show Comments") {
+        view.innerText = "Hide Comments";
+    } else {
+        view.innerText = "Show Comments";
+    }
 }
