@@ -31,22 +31,33 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import java.util.List;
 import com.google.sps.objects.Comment;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.datastore.FetchOptions;
 
 
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
   private static final Gson gson = new Gson();  
-  private static final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService(); 
+  private static final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+  private static final int NUM_COMMENTS_DEFAULT = 1;
+  private static final String PARAM_NUM_COMMENTS = "num-comments"; 
  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    List<Comment> commentList = new ArrayList<Comment>();
+    int maxNumComments;
+        try {
+            maxNumComments = Integer.parseInt(request.getParameter(PARAM_NUM_COMMENTS));
+        } catch (NumberFormatException e) {
+            maxNumComments = NUM_COMMENTS_DEFAULT;
+        }
 
     // Set up the query to fetch the comments from server
     Query query = new Query(Comment.TYPE);
     PreparedQuery results = datastore.prepare(query);
-    for (Entity entity : results.asIterable()) {
+    List<Comment> commentList = new ArrayList<Comment>();
+
+
+    for (Entity entity : results.asIterable(FetchOptions.Builder.withLimit(maxNumComments))) {
       String key = KeyFactory.keyToString(entity.getKey());
       String text = (String) entity.getProperty(Comment.COMMENT_TEXT);
       Comment comment = new Comment(key,text);
