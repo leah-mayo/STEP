@@ -131,7 +131,7 @@ body {
     display: none;
 }
 
-ulsidebar {
+.ul-sidebar {
   list-style-type: none;
   margin: 0;
   padding: 0;
