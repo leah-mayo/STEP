@@ -65,10 +65,14 @@ function four() {
 /**
  * Fetches comments from the server and adds them to the page
  */
+var maxNumComments = 5;
+
 function retrieveComments() {
-  fetch('/data').then(response => response.json()).then((comments) => {
-    console.log("retrieved comments: " + comments);
-    addComments(comments);
+  maxNumComments = document.getElementById("num-comments").value;
+  console.log(`# of comments shown:${maxNumComments}`);
+  fetch('/data?num-comments=' + maxNumComments).then(response => response.json()).then((commentList) => {
+    console.log("retrieved comments: " + commentList);
+    addComments(commentList);
   });
 }
 
@@ -106,9 +110,9 @@ function toggleComments() {
     comments.classList.toggle("gone");
 
     let view = document.getElementById("show-hide-comments");
-    if (view.innerText == "Show Comments") {
-        view.innerText = "Hide Comments";
-    } else {
+    if (view.innerText == "Hide Comments") {
         view.innerText = "Show Comments";
+    } else {
+        view.innerText = "Hide Comments";
     }
 }
