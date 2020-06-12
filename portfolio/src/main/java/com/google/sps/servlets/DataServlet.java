@@ -32,6 +32,8 @@ import java.util.List;
 import com.google.sps.objects.Comment;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.FetchOptions;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 
 @WebServlet("/data")
@@ -41,6 +43,7 @@ public class DataServlet extends HttpServlet {
   private static final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
   private static final int NUM_COMMENTS_DEFAULT = 1;
   private static final String PARAM_NUM_COMMENTS = "num-comments"; 
+  private static final UserService userService = UserServiceFactory.getUserService();
  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -60,7 +63,9 @@ public class DataServlet extends HttpServlet {
     for (Entity entity : results.asIterable(FetchOptions.Builder.withLimit(maxNumComments))) {
       String key = KeyFactory.keyToString(entity.getKey());
       String text = (String) entity.getProperty(Comment.COMMENT_TEXT);
-      Comment comment = new Comment(key,text);
+      String name = (String) entity.getProperty(Comment.NAME);
+      String email = (String) entity.getProperty(Comment.EMAIL);
+      Comment comment = new Comment(key,text,name,email);
         
       commentList.add(comment);
     }
@@ -77,12 +82,15 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String input = getParameter(request, "text-input", "");
+    String name = getParameter(request, "name-input", "");
 
     Entity commentEntity = new Entity(Comment.TYPE);
     commentEntity.setProperty(Comment.COMMENT_TEXT, input);
+    commentEntity.setProperty(Comment.NAME, name);
+    commentEntity.setProperty(Comment.EMAIL, userService.getCurrentUser().getEmail());
     datastore.put(commentEntity);
 
-    response.sendRedirect("/index.html");
+    response.sendRedirect("/feedback.html");
   }
 
    /**
