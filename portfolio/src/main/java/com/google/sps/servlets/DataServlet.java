@@ -83,11 +83,12 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String input = getParameter(request, "text-input", "");
     String name = getParameter(request, "name-input", "");
+    String email = userService.getCurrentUser().getEmail();
 
     Entity commentEntity = new Entity(Comment.TYPE);
     commentEntity.setProperty(Comment.COMMENT_TEXT, input);
     commentEntity.setProperty(Comment.NAME, name);
-    commentEntity.setProperty(Comment.EMAIL, userService.getCurrentUser().getEmail());
+    commentEntity.setProperty(Comment.EMAIL, email);
     datastore.put(commentEntity);
 
     response.sendRedirect("/feedback.html");
