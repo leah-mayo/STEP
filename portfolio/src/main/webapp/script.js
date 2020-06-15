@@ -187,24 +187,25 @@ function handleCommentFormVisibility() {
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawChart);
 
-/** Creates a chart and adds it to the page. */
+/** Fetches activity data and uses it to create a chart. */
 function drawChart() {
-  const data = new google.visualization.DataTable();
-  data.addColumn('string', 'Animal');
-  data.addColumn('number', 'Count');
-        data.addRows([
-          ['Lions', 10],
-          ['Tigers', 5],
-          ['Bears', 15]
-        ]);
+  fetch('/activity-data').then(response => response.json())
+  .then((activityVotes) => {
+    const data = new google.visualization.DataTable();
+    data.addColumn('string', 'Activity');
+    data.addColumn('number', 'Votes');
+    Object.keys(activityVotes).forEach((activity) => {
+      data.addRow([activity, activityVotes[activity]]);
+    });
 
-  const options = {
-    'title': 'Zoo Animals',
-    'width':500,
-    'height':400
-  };
+    const options = {
+      'title': 'Quarantine Activities Poll',
+      'width':600,
+      'height':500
+    };
 
-  const chart = new google.visualization.PieChart(
-      document.getElementById('chart-container'));
-  chart.draw(data, options);
+    const chart = new google.visualization.ColumnChart(
+        document.getElementById('chart-container'));
+    chart.draw(data, options);
+  });
 }

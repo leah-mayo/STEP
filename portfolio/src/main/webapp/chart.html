@@ -29,6 +29,21 @@
     
      <div id="chart-container"></div> 
 
+     <h2>Poll</h2>
+    <form action="/activity-data" method="POST">
+    <p> Have you picked up any new hobbies or activities during the stay at home order?</p>
+      <select name="activity">
+        <option value="TV">I'm getting into new shows and movies.</option>
+        <option value="Cooking">I'm trying my hand in the kitchen.</option>
+        <option value="Instrument">I'm learning to play an instrument.</option>
+        <option value="Photography">I've been doing alot of art/photography.</option>
+        <option value="Sports">I've been playing sports/working out.</option>
+        <option value="Other">Yes, but it's not listed.</option>
+        <option value="No">I haven't</option>
+      </select>
+      <button>Submit</button>
+    </form>
+
     </div>
   </body>
 </html>
