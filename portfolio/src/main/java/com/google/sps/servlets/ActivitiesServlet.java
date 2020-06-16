@@ -29,21 +29,24 @@ import javax.servlet.http.HttpServletResponse;
 public class ActivitiesServlet extends HttpServlet {
 
   private Map<String, Integer> activityVotes = new HashMap<>();
+  private static final Gson gson = new Gson();
+  private static final String ACTIVITY = "activity";
+  private static final String JSON = "application/json";
+  private static final String CHARTS_PAGE = "chart/html";
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("application/json");
-    Gson gson = new Gson();
+    response.setContentType(JSON);
     String json = gson.toJson(activityVotes);
     response.getWriter().println(json);
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String activity = request.getParameter("activity");
+    String activity = request.getParameter(ACTIVITY);
     int currentVotes = activityVotes.containsKey(activity) ? activityVotes.get(activity) : 0;
     activityVotes.put(activity, currentVotes + 1);
 
-    response.sendRedirect("/chart.html");
+    response.sendRedirect(CHARTS_PAGE);
   }
 }
