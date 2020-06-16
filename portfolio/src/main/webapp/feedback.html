@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <body style="background c">
+  <head>
+    <meta charset="UTF-8">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
+
+  <body onload= "startAuth()">
+
+   <div class = "ul-sidebar">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/introduction.html">About Me</a></li>
+    <li><a href="/experience.html">Experience</a></li>
+    <li><a href="/academics.html">Academics</a></li>
+    <li><a href="/hidden-talents.html">Hidden Talents</a></li>
+    <li><a href="/photo-gallery.html">Photo Gallery</a></li>
+    <li><a href="/chart.html">Chart</a></li>
+    <li><a class="active" href="/feedback.html">Feedback</a></li>
+   </div>
+
+   
+   
+    <div id="content">
+
+      <div id="login">
+        <p id="auth-greeting">Please Log In here: </p>
+        <a id="auth-button" class="login">Log In</a>
+      </div>
+
+    <div id="comment-section">
+        <form action = "/data" method = "POST" id= "comment-form">  
+          <input type = "text" id = "name-input" name = "name-input" placeholder="Name "></input>
+          <input type = "text" id = "text-input" name = "text-input" placeholder="Submit any questions, comments, or concerns :) "></input>
+          <br>
+          <input type = "submit" />
+        </form>
+        <h3 id="comment-login-alert">Please log in to write a comment.</h3>
+        <br>
+        <div class = center2>
+          <button id = "show-hide-comments" class = "btn" onclick="toggleComments()">Hide Comments</button>
+        </div>
+        
+          <form action="/data" method="POST" id = "data-display">
+            <div class = center2>
+              <label for="num-comments"># of comments on display:</label>
+              <select id="num-comments" name="num-comments" onchange="retrieveComments()">
+                <option>5</option>
+                <option>10</option>
+                <option>15</option>
+                <option>20</option>
+              </select>
+            </div>
+          </form>
+        <div id= "data-container"> </div>
+
+      </div>
+
+    </div>
+  </body>
+</html>

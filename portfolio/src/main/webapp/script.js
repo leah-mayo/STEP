@@ -12,6 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
+
+function startAuth() {
+  handleCommentFormVisibility();
+  initializeAuth();  
+  console.log("Initializing authentication...");
+}
+
 /**
  * Adds a random fact to the page.
  */
@@ -115,4 +123,89 @@ function toggleComments() {
     } else {
         view.innerText = "Hide Comments";
     }
+}
+
+/**
+ * Retrieves auth info and displays the correct login interface
+ */
+function initializeAuth() {
+  const loginStatusPromise = fetch("/auth");
+
+  loginStatusPromise
+    .then((response) => response.json())
+    .then((loginInfo) => {
+      const loginStatus = loginInfo["loginStatus"];
+      const loginURL = loginInfo["loginURL"];
+      const logoutURL = loginInfo["logoutURL"];
+
+      const authButton = document.getElementById("auth-button");
+      const authGreeting = document.getElementById("auth-greeting");
+
+      if (loginStatus === "true") {
+        authGreeting.innerHTML = "You're logged in:";
+        retrieveComments()
+        authButton.innerHTML = "Log Out";
+        authButton.href = logoutURL;
+        authButton.classList.add("logout");
+        authButton.classList.remove("login");
+      } else {
+        authGreeting.innerHTML = "Please log in here: ";
+
+        authButton.innerHTML = "Log In";
+        authButton.href = loginURL;
+        authButton.classList.add("login");
+        authButton.classList.remove("logout");
+      }
+    });
+}
+
+/**
+ * Hides comment form if user is not signed in. Otherwise display user form.
+ */
+function handleCommentFormVisibility() {
+  const loginStatusPromise = fetch("/auth");
+
+  loginStatusPromise
+    .then((response) => response.json())
+    .then((loginInfo) => {
+      const loginStatus = loginInfo["loginStatus"];
+      const commentForm = document.getElementById("comment-form");
+      const dataDisplay = document.getElementById("data-display");
+      const loginAlert = document.getElementById("comment-login-alert");
+      if (loginStatus === "true") {
+        commentForm.style.visibility = "visible";
+        dataDisplay.styleVisibility = "visible";
+        loginAlert.style.visibility = "collapse";
+      } else {
+        commentForm.style.visibility = "hidden";
+        dataDisplay.styleVisibility = "hidden";
+        loginAlert.style.visibility = "visible";
+      }
+    });
+}
+
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+/** Fetches activity data and uses it to create a chart. */
+function drawChart() {
+  fetch('/activity-data').then(response => response.json())
+  .then((activityVotes) => {
+    const data = new google.visualization.DataTable();
+    data.addColumn('string', 'Activity');
+    data.addColumn('number', 'Votes');
+    Object.keys(activityVotes).forEach((activity) => {
+      data.addRow([activity, activityVotes[activity]]);
+    });
+
+    const options = {
+      'title': 'Quarantine Activities Poll',
+      'width':600,
+      'height':500
+    };
+
+    const chart = new google.visualization.ColumnChart(
+        document.getElementById('chart-container'));
+    chart.draw(data, options);
+  });
 }

@@ -14,30 +14,39 @@
 
 package com.google.sps.servlets;
 
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
+import com.google.gson.Gson;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.google.gson.Gson;
-import java.util.HashMap;
 
-@WebServlet("/auth")
-public class AuthServlet extends HttpServlet {
+
+@WebServlet("/activity-data")
+public class ActivitiesServlet extends HttpServlet {
+
+  private Map<String, Integer> activityVotes = new HashMap<>();
+  private static final Gson gson = new Gson();
+  private static final String ACTIVITY = "activity";
+  private static final String JSON = "application/json";
+  private static final String CHARTS_PAGE = "chart/html";
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    response.setContentType(JSON);
+    String json = gson.toJson(activityVotes);
+    response.getWriter().println(json);
+  }
 
-    UserService userService = UserServiceFactory.getUserService();
-    
-    HashMap<String, String> loginInfo = new HashMap<String, String>();
-    loginInfo.put("loginStatus", Boolean.toString(userService.isUserLoggedIn()));
-    loginInfo.put("loginURL", userService.createLoginURL("/index.html"));
-    loginInfo.put("logoutURL", userService.createLogoutURL("/index.html"));
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String activity = request.getParameter(ACTIVITY);
+    int currentVotes = activityVotes.containsKey(activity) ? activityVotes.get(activity) : 0;
+    activityVotes.put(activity, currentVotes + 1);
 
-    response.setContentType("application/json;");
-    response.getWriter().println((new Gson()).toJson(loginInfo));
+    response.sendRedirect(CHARTS_PAGE);
   }
 }

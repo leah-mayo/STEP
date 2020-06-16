@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <body style="background c">
+  <head>
+    <meta charset="UTF-8">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+
+   <div class = "ul-sidebar">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/introduction.html">About Me</a></li>
+    <li><a href="/experience.html">Experience</a></li>
+    <li><a href="/academics.html">Academics</a></li>
+    <li><a href="/hidden-talents.html">Hidden Talents</a></li>
+    <li><a href="/photo-gallery.html">Photo Gallery</a></li>
+    <li><a class="active" href="/chart.html">Chart</a></li>
+    <li><a href="/feedback.html">Feedback</a></li>
+   </div>
+   
+   <div id="content">
+  
+     <h2>Chart</h2>
+
+     <p>Chart(s) on this page are made possible using the Google Charts library.</p>
+    
+     <div id="chart-container"></div> 
+
+     <h2>Poll</h2>
+    <form action="/activity-data" method="POST">
+    <p> Have you picked up any new hobbies or activities during the stay at home order?</p>
+      <select name="activity">
+        <option value="TV">I'm getting into new shows and movies.</option>
+        <option value="Cooking">I'm trying my hand in the kitchen.</option>
+        <option value="Instrument">I'm learning to play an instrument.</option>
+        <option value="Photography">I've been doing alot of art/photography.</option>
+        <option value="Sports">I've been playing sports/working out.</option>
+        <option value="Other">Yes, but it's not listed.</option>
+        <option value="No">I haven't</option>
+      </select>
+      <button>Submit</button>
+    </form>
+
+    </div>
+  </body>
+</html>

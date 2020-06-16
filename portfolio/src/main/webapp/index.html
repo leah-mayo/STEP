@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body onload="retrieveComments()">
 
    <div class = "ul-sidebar">
     <li><a class="active" href="/index.html">Home</a></li>
@@ -16,49 +15,24 @@
     <li><a href="/academics.html">Academics</a></li>
     <li><a href="/hidden-talents.html">Hidden Talents</a></li>
     <li><a href="/photo-gallery.html">Photo Gallery</a></li>
+    <li><a href="/chart.html">Chart</a></li>
+    <li><a href="/feedback.html">Feedback</a></li>
    </div>
    
     <div id="content">
       <h1>Leah's Portfolio</h1>
-
+      <br>  
       <div class = "center2">
-        <div>This is my personal portfolio.</div>
-        <div>Click below for a fact about me:</div>
+        <div>Click below for a random fact about me:</div>
         <br>
         <button class = "btn" onclick="addRandomFact()">click here</button>
         <div id="fact-container"></div>
         <br>
-
         <a>Let's connect on </a><a href="https://www.linkedin.com/in/leahmayo/">LinkedIn</a><a>!</a>
         <br>
         <a>Check out my </a><a href="https://github.com/leah-mayo">GitHub</a></a><a>!</a>
       </div>
       
-      
-
-    <div id="comment-section">
-        <form action = "/data" method = "POST">  
-          <input type = "text" id = "text-input" name = "text-input" placeholder="Submit any questions, comments, or concerns :) "></input>
-          <br>
-          <input type = "submit" />
-        </form>
-        <br>
-        <div class = center2>
-          <button id = "show-hide-comments" class = "btn" onclick="toggleComments()">Hide Comments</button>
-        </div>
-        <form action="/data" method="POST">
-          <div class = center2>
-            <label for="num-comments"># of comments on display:</label>
-            <select id="num-comments" name="num-comments" onchange="retrieveComments()">
-            <option>5</option>
-            <option>10</option>
-            <option>15</option>
-            <option>20</option>
-          </select>
-          </div>
-        </form>
-        <div id= "data-container"> </div>
-      </div>
 
     </div>
   </body>
