@@ -27,11 +27,12 @@ import java.util.HashMap;
 @WebServlet("/auth")
 public class AuthServlet extends HttpServlet {
 
+public static final Gson gson = new Gson();
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     UserService userService = UserServiceFactory.getUserService();
-    Gson gson = new Gson();
     
     HashMap<String, String> loginInfo = new HashMap<String, String>();
     loginInfo.put("loginStatus", Boolean.toString(userService.isUserLoggedIn()));

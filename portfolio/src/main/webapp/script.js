@@ -143,7 +143,7 @@ function initializeAuth() {
 
       if (loginStatus === "true") {
         authGreeting.innerHTML = "You're logged in:";
-        retrieveComments()
+        retrieveComments();
         authButton.innerHTML = "Log Out";
         authButton.href = logoutURL;
         authButton.classList.add("logout");
