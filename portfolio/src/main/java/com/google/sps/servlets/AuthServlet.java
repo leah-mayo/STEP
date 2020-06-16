@@ -31,6 +31,7 @@ public class AuthServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     UserService userService = UserServiceFactory.getUserService();
+    Gson gson = new Gson();
     
     HashMap<String, String> loginInfo = new HashMap<String, String>();
     loginInfo.put("loginStatus", Boolean.toString(userService.isUserLoggedIn()));
@@ -38,6 +39,6 @@ public class AuthServlet extends HttpServlet {
     loginInfo.put("logoutURL", userService.createLogoutURL("/index.html"));
 
     response.setContentType("application/json;");
-    response.getWriter().println((new Gson()).toJson(loginInfo));
+    response.getWriter().println(gson.toJson(loginInfo));
   }
 }
