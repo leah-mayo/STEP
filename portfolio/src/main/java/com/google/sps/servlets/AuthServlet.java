@@ -27,6 +27,8 @@ import java.util.HashMap;
 @WebServlet("/auth")
 public class AuthServlet extends HttpServlet {
 
+public static final Gson gson = new Gson();
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -38,6 +40,6 @@ public class AuthServlet extends HttpServlet {
     loginInfo.put("logoutURL", userService.createLogoutURL("/index.html"));
 
     response.setContentType("application/json;");
-    response.getWriter().println((new Gson()).toJson(loginInfo));
+    response.getWriter().println(gson.toJson(loginInfo));
   }
 }
